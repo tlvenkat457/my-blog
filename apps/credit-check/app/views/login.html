@@ -1,0 +1,37 @@
+<div class="modal-header">
+    <h3 class="text-left">Start filling your details</h3>
+    <code>i got your back</code>
+</div>
+<div class="modal-body">
+    <form name="userForm"class="form col-md-12 center-block" ng-submit="onSubmit()" novalidate autocomplete="off">
+        <div class="form-group" ng-class="{ 'has-error' : userForm.lname.$invalid && !userForm.lname.$pristine }">
+            <input type="text" class="form-control input-lg" name="lname"placeholder="last name" ng-model="lname" required>
+            <p align="right" ng-show="userForm.lname.$invalid && !userForm.lname.$pristine" class="help-block">last name is required</p>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control input-lg" placeholder="first name" ng-model="fname" required>
+        </div>
+        <!--
+        <div class="form-group">
+            <input type="date" class="form-control input-lg" placeholder="date of birth(MM/DD/YYYY)" ng-model="dob" required>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control input-lg" placeholder="social security number" ng-model="ssn" required ng-maxlength="9">
+        </div>
+        <div class="form-group">
+            <input type="email" class="form-control input-lg" placeholder="email" ng-model="email" required>
+        </div>
+
+    -->
+        <div class="form-group">
+            <input type="text" class="form-control input-lg" placeholder="address" ng-model="address" ng-change="onAddChange()" required>
+        </div>
+        <a ng-repeat="address in apiAddresses" ng-click="addSelected(address)" ng-hide="addressComplete">{{address.text}}<br></a>
+        
+        <div class="form-group">
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
+        </div>
+        
+    </form>
+    <img ng-show="loadGif" src="http://www.nasa.gov/multimedia/videogallery/ajax-loader.gif">{{loading}}
+</div
