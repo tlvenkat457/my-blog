@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+   
+    <link href="css/example.css" rel="stylesheet">
+
+    <link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+<script src="lib/ionic-service-core/ionic-core.js"></script>
+<script src="lib/ionic-service-push/ionic-push.js"></script>
+
+<script src="lib/ionic-platform-web-client/dist/ionic.io.bundle.min.js"></script>
+
+
+    <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/1.0.0/angularfire.min.js"></script>
+    
+    <!-- cordova script (this will be a 404 during development) -->
+    <!-- Cordova is bootstrapped by ionic-platform-web-client, uncomment this if you remove ionic-platform-web-client... -->
+<!-- <script src="cordova.js"></script> -->
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+
+    <script type="text/javascript">
+    function initPushwoosh()
+{
+    var pushNotification = cordova.require("pushwoosh-cordova-plugin.PushNotification");
+ 
+    //set push notifications handler
+    document.addEventListener('push-notification', function(event) {
+        var title = event.notification.title;
+        var userData = event.notification.userdata;
+                                 
+        if(typeof(userData) != "undefined") {
+            console.warn('user data: ' + JSON.stringify(userData));
+        }
+                                     
+        alert(title);
+    });
+ 
+    //initialize Pushwoosh with projectid: "GOOGLE_PROJECT_NUMBER", pw_appid : "PUSHWOOSH_APP_ID". This will trigger all pending push notifications on start.
+    pushNotification.onDeviceReady({ projectid: "258130284657", pw_appid : "03AF8-FB571" });
+ 
+    //register for pushes
+    pushNotification.registerDevice(
+        function(status) {
+            var pushToken = status;
+            console.warn('push token: ' + pushToken);
+        },
+        function(status) {
+            console.warn(JSON.stringify(['failed to register ', status]));
+        }
+    );
+}
+    </script>
+</head>
+
+<body ng-app="starter" ng-controller="Messages">
+    <ion-pane "class="messaging-view">
+    <ion-header-bar class="bar-calm">
+      <h1 class="title">Tadikonda&apos;s Chat Room</h1>
+    </ion-header-bar>
+
+        <ion-content class="content-stable" on-swipe-left="hideTime = false" on-swipe-right="hideTime = true">
+
+      
+                <div ng-repeat="message in messages" ng-class="{other: message.userId != myId}" class="messages">
+                    <div class="message" ng-class="{&apos;slide-right&apos;: hideTime, &apos;&apos;: !hideTime}">
+                        <span>{{ message.body }}</span>
+                    </div>
+                    <div class="time" ng-class="{&apos;slide-right&apos;: hideTime, &apos;&apos;: !hideTime}"></div>
+                </div>
+            
+        </ion-content>
+        <ion-footer-bar keyboard-attach="" class="bar-stable item-input-inset">
+      
+            <label class="item-input-wrapper">
+                <input ng-model="msg" type="text" id="messageInput" placeholder="Type a message...">
+            </label>
+            <button class="button button-clear" ng-click="addMessage()">
+                Send
+            </button>
+        </ion-footer-bar>
+    </ion-pane>
+</body>
+
+</html>
