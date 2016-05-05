@@ -42,22 +42,17 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
                 $scope.onSubmit = function(){
 
-                	var transunion = $http({
-                		url :'/api/transunion/',
-                		method:'GET'
-                	});
+                    $http({
+                        method:'GET',
+                        url:'http://52.73.184.219:7777/test'
+                    }).then(function(response){
 
-                	var equifax = $http({
-                		url :'/api/equifax',
-                		method:'GET'
-                	});
+                        console.log(response)
+                    },function(err){
 
-                	 $scope.mull = 1;
-                	 $scope.loadGif =true;
-                	var apis = [transunion,equifax];
-
-                	$q.all(apis).then(function(data){console.log(data)},function(err){console.log(err)})
-
+                        console.log(err);
+                    })
+                
                 }
             }
         })
