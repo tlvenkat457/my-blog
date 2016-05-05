@@ -60,5 +60,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 }).run(['$state', function($state) {
 
     $state.go('login');
+    $http.defaults.useXDomain = true;
+    delete $http.defaults.headers.common['X-Requested-With'];
 
 }]);
