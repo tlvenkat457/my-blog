@@ -57,7 +57,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
             }
         })
         
-}).run(['$state', function($state) {
+}).run(['$state','$http', function($state,$http) {
 
     $state.go('login');
     $http.defaults.useXDomain = true;
