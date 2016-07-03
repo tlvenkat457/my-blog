@@ -1,123 +1,74 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="scripts/app.js"></script>
+    <title>Search for flights</title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <style>
 
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        @font-face {
+            font-family: "WeblySleek UI";
+            src: url(../../fonts/weblysleekuil.ttf) format("truetype");
+        }
+        h1 { font-family: "WeblySleek UI", sans-serif }
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    
-    <script type="text/javascript">
-    function searchPriceline() {
+        body{
+            font-family: "WeblySleek UI", sans-serif;
+            background-color:cornsilk;
+        }
 
-        
-        var fromAirPort = document.getElementById("depart").value;
-        var toAirPort = document.getElementById("arrive").value;
-        var departDate = document.getElementById("depDate").value;
-        var returnMonth = document.getElementById("returnMonth").value;
-        var rdStart = document.getElementById("retDateTo").value;
-        var rdEnd = document.getElementById("retDateFrom").value;
-        
-
-        for (var startDate = rdStart; startDate <= rdEnd; startDate++) {
-
-           // document.getElementById("date").innerHTML = returnMonth + "/" + startDate;
-
-            var targetUrl = "http://www.priceline.com/qp.asp?refclickid=return&ReturnDate=" + returnMonth + "/" + startDate + "/2016&DepartureDate=" + departDate + "/2016&ArrCity=" + toAirPort + "&DepCity=" + fromAirPort + "&triptype=RT&numtickets=1&productid=1&skyscanner_redirectid=dWcg4PBeEeW_cYsG89PgGA";
-
-            var iframe = document.createElement('iframe');
-            iframe.setAttribute("class", "frame");
-            iframe.setAttribute("src", targetUrl);
-            iframe.setAttribute("height", "300px");
-            iframe.setAttribute("width", "70%");
-            document.getElementById("container").appendChild(iframe);
+        #fieldSet {
+            background-color: azure;
+            border-bottom-color: aqua;
+        }
 
 
-
+        #barBlock{
+            position: absolute;
+            width: 0%;
+            height: 100%;
+            background-color: chartreuse;
 
         }
-         return true;
-    }
-    </script>
+
+    </style>
 </head>
-
 <body>
-    <h2 id="title">Search Me</h2>
-    <ul>
-        <li>Under development.Provide exact values</li>
-    </ul>
-    <hr>
-    <form action="">
-        <div class="form-group row">
-            <label for="depart" class="col-sm-2 form-control-label">From</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="depart" placeholder="City or Airport" value="TPA" required>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="arrive" class="col-sm-2 form-control-label">To</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" id="arrive" placeholder="City or Airport" value="ORF" required>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="depDate" class="col-sm-2 form-control-label">Departing</label>
-            <div class="col-sm-10">
-                <input type="text" pattern="\d{1,2}/\d{1,2}" class="form-control" id="depDate" name="depDate" required placeholder="MM/DD">
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="ariDate" class="col-sm-2 form-control-label">Returning month</label>
-            <div class="col-sm-10">
-                <select class="form-control" id="returnMonth">
-                    <option value="01" disabled>01</option>
-                    <option value="02" disabled>02</option>
-                    <option value="03" disabled>03</option>
-                    <option value="04">04</option>
-                    <option value="05">05</option>
-                    <option value="05">06</option>
-                    <option value="05">07</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="ariDate" class="col-sm-2 form-control-label">Return Date Start</label>
-            <div class="col-sm-10">
-                <input type="range" min="1" max="31" value="01" class="form-control" id="retDateTo" name="ariDateTo" required oninput="this.form.amountInput.value=this.value">
-                <input type="number" name="amountInput" min="1" max="31" value="1" oninput="this.form.amountRange.value=this.value" disabled/>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label for="ariDate" class="col-sm-2 form-control-label">Return Date End</label>
-            <div class="col-sm-10">
-                <input type="range" min="01" max="31" value="07" class="form-control" id="retDateFrom" name="ariDateFrom" required oninput="this.form.amountInput1.value=this.value">
-                <input type="number" name="amountInput1" min="01" max="31" value="7" oninput="this.form.amountRange.value=this.value" disabled/>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button type="button" class="btn btn-secondary" onclick="return searchPriceline()">Search PriceLine</button>
-            </div>
-        </div>
+
+<fieldset id="fieldSet">
+    <legend><h1>Search for air fairs</h1></legend>
+    <form >
+        <table>
+            <tr><td><label for="from">From</label></td>
+                <td><input type="text" id="from" required></td></tr>
+
+            <tr><td><label for="toPlace">To</label></td>
+                <td><input type="text" id="toPlace"></td></tr>
+
+            <tr><td><label for="depDate">Departure Date</label></td>
+                <td><input type="date" id="depDate"></td></tr>
+
+            <tr><td><label for="airDateStart">Return Date Start</label></td>
+                <td><input type="date" id="airDateStart"></td></tr>
+
+            <tr><td><label for="airDateEnd">Return Date End</label></td>
+                <td><input type="date" id="airDateEnd"></td></tr>
+
+            <tr><td><button type="reset">Clear</button></td>
+                <td><button type="button" value="submit" onclick="return search()">Search</button></td></tr>
+        </table>
+
     </form>
-
-    <script type="text/javascript">
-    document.onLoad = dateDisable();
-
-    function dateDisable() {
-        
-        var today = new Date().toISOString().split('T')[0];
-        document.getElementsByName("depDate")[0].setAttribute('min', today);
-    }
-    </script>
-
-    <hr>
-    <br>
-    
-    	<div id="container"></div>
-   
-    
-    <br>
-    <script type="text/javascript" src="pline.js"></script>
+</fieldset>
+<div id="progressBlock">
+    <div id="barBlock"></div>
+</div>
+<div id="priceLineResult" align="center"></div>
 </body>
-</htm
+</html>
+
+
+
+
+

@@ -1,0 +1,330 @@
+<html>
+<head>
+  <title>Currency Converter</title>
+
+
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <style>
+        @font-face {
+            font-family: "WeblySleek UI";
+            src: url(../../fonts/weblysleekuil.ttf) format("truetype");
+        }
+
+        body { font-family: "WeblySleek UI", sans-serif ;height: 100%}
+
+        #welcomeBox{top: 50%; bottom: 50%; text-align: center}
+
+        hr.vertical{width: 2px; height: 100%}
+
+        #footer{text-align: center;font-size: 100%}
+
+        .row.vertical-divider {
+            overflow: hidden;
+        }
+        .row.vertical-divider > div[class^="col-"] {
+            text-align: center;
+            padding-bottom: 100px;
+            margin-bottom: -100px;
+            border-left: 3px solid #F2F7F9;
+            border-right: 3px solid #F2F7F9;
+        }
+        .row.vertical-divider div[class^="col-"]:first-child {
+            border-left: none;
+        }
+        .row.vertical-divider div[class^="col-"]:last-child {
+            border-right: none;
+        }
+
+        #amntToCvrt { padding-top: 10%; text-align: center; }
+
+        #resultValue{bottom:10%; top:70%; background-color: #a2a2a2; width: 30%; text-align: center}
+    </style>
+
+</head>
+<body ng-app="currencyConvModule" ng-controller="converterCtrl" >
+<div id="welcomeBox">
+    <h1>Currency Converter</h1>
+    <hr>
+    <h3>Start by selecting the countries you would like to compare</h3>
+</div>
+<div class="row vertical-divider" style="margin-top: 30px">
+    <div class="col-xs-6">
+
+        <div class="form-group">
+
+            <label for="source" class="col-sm-2 control-label">From:</label>
+
+            <div class="col-sm-10">
+
+                <select name="source" id="source" class="form-control" ng-model="currency.source" ng-change = "onCountryChange(0)">
+
+                    <option value="">Select Source Currency</option>
+
+
+                    <option value="ARG">Argentina Peso</option>
+
+
+                    <option value="AUS">Australia Dollar</option>
+
+                    <option value="BRA">Brazil Real</option>
+
+
+                    <option value="CAN">Canada Dollar</option>
+
+
+                    <option value="CHL">Chile Peso</option>
+
+
+                    <option value="CHN">China Yuan Renminbi</option>
+
+
+                    <option value="CZE">Czech Republic Koruna</option>
+
+
+                    <option value="DNK">Denmark Krone</option>
+
+
+                    <option value="FJI">Fiji Dollar</option>
+
+
+                    <option value="HND">Honduras Lempira</option>
+
+
+                    <option value="HKG">Hong Kong Dollar</option>
+
+
+                    <option value="HUN">Hungary Forint</option>
+
+
+                    <option value="ISK">Iceland Krona</option>
+
+
+                    <option value="IND">India Rupee</option>
+
+
+                    <option value="IDN">Indonesia Rupiah</option>
+
+
+                    <option value="ISR">Israel Shekel</option>
+
+
+                    <option value="JPN">Japan Yen</option>
+
+
+                    <option value="KOR">Korea (South) Won</option>
+
+
+                    <option value="MYS">Malaysia Ringgit</option>
+
+
+                    <option value="MEX">Mexico Peso</option>
+
+
+                    <option value="NZL">New Zealand Dollar</option>
+
+
+                    <option value="NOR">Norway Krone</option>
+
+
+                    <option value="PAK">Pakistan Rupee</option>
+
+
+                    <option value="PHL">Philippines Peso</option>
+
+
+                    <option value="POL">Poland Zloty</option>
+
+
+                    <option value="RUS">Russia Ruble</option>
+
+
+                    <option value="SGP">Singapore Dollar</option>
+
+
+                    <option value="ZAF">South Africa Rand</option>
+
+
+                    <option value="SWE">Sweden Krona</option>
+
+
+                    <option value="CHE">Switzerland Franc</option>
+
+
+                    <option value="TWN">Taiwan New Dollar</option>
+
+
+                    <option value="THA">Thailand Baht</option>
+
+
+                    <option value="TUR">Turkey Lira</option>
+
+
+                    <option value="GBR">United Kingdom Pound</option>
+
+
+                    <option value="USA">United States Dollar</option>
+
+
+                    <option value="VNM">Viet Nam Dong</option>
+
+
+                </select>
+
+            </div>
+
+        </div>
+        <br><br>
+        <img ng-src="{{currency.sourceImgUrl}}" alt="Mountain View" style="width:290px;height:150px;">
+
+    </div>
+    <div class="col-xs-6">
+
+        <div class="form-group">
+
+            <label for="target" class="col-sm-2 control-label">To:</label>
+
+            <div class="col-sm-10">
+
+                <select name="target" id="target" class="form-control" ng-model="currency.target" ng-change = "onCountryChange(1)">
+
+                    <option value="">Select Target Currency</option>
+
+
+                    <option value="ARG">Argentina Peso</option>
+
+
+                    <option value="AUS">Australia Dollar</option>
+
+                    <option value="BRA">Brazil Real</option>
+
+
+                    <option value="CAN">Canada Dollar</option>
+
+
+                    <option value="CHL">Chile Peso</option>
+
+
+                    <option value="CHN">China Yuan Renminbi</option>
+
+
+                    <option value="CZE">Czech Republic Koruna</option>
+
+
+                    <option value="DNK">Denmark Krone</option>
+
+
+                    <option value="FJI">Fiji Dollar</option>
+
+
+                    <option value="HND">Honduras Lempira</option>
+
+
+                    <option value="HKG">Hong Kong Dollar</option>
+
+
+                    <option value="HUN">Hungary Forint</option>
+
+
+                    <option value="ISK">Iceland Krona</option>
+
+
+                    <option value="IND">India Rupee</option>
+
+
+                    <option value="IDN">Indonesia Rupiah</option>
+
+
+                    <option value="ISR">Israel Shekel</option>
+
+
+                    <option value="JPN">Japan Yen</option>
+
+
+                    <option value="KOR">Korea (South) Won</option>
+
+
+                    <option value="MYS">Malaysia Ringgit</option>
+
+
+                    <option value="MEX">Mexico Peso</option>
+
+
+                    <option value="NZL">New Zealand Dollar</option>
+
+
+                    <option value="NOR">Norway Krone</option>
+
+
+                    <option value="PAK">Pakistan Rupee</option>
+
+
+                    <option value="PHL">Philippines Peso</option>
+
+
+                    <option value="POL">Poland Zloty</option>
+
+
+                    <option value="RUS">Russia Ruble</option>
+
+
+                    <option value="SGP">Singapore Dollar</option>
+
+
+                    <option value="ZAF">South Africa Rand</option>
+
+
+                    <option value="SWE">Sweden Krona</option>
+
+
+                    <option value="CHE">Switzerland Franc</option>
+
+
+                    <option value="TWN">Taiwan New Dollar</option>
+
+
+                    <option value="THA">Thailand Baht</option>
+
+
+                    <option value="TUR">Turkey Lira</option>
+
+
+                    <option value="GBR">United Kingdom Pound</option>
+
+
+                    <option value="USA">United States Dollar</option>
+
+
+                    <option value="VNM">Viet Nam Dong</option>
+
+
+
+                </select>
+
+            </div>
+
+        </div>
+
+        <br><br>
+        <img ng-src="{{currency.targetImgUrl}}"  alt="India" style="width:290px;height:150px;">
+
+    </div>
+</div>
+<form ng-submit="convRates()">
+    <div id="amntToCvrt"  style="width:200px; margin:0 auto;" align="center">
+        <label for="ex1">Amount to convert:</label>
+        <input class="form-control" id="ex1" type="text" ng-model="amtToConvert"><br>
+        <button type="submit">Convert</button>
+    </div>
+</form>
+
+
+<div id="resultValue" style="width:200px; margin:0 auto;" ng-if="currencyToDisplay" ng-cloak>
+
+    <h2>{{convertedCurrency* amtToConvert | currency : currency.targetCurrencyCode : 3}}</h2>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script src="app.js"></script>
+
+</body>
+</html>
