@@ -4,6 +4,28 @@ app.controller("converterCtrl",["$scope","$http","currencyConvSvc",function($sco
     console.log("Hi ctrl");
     $scope.currencyToDisplay = false;
     $scope.currency = {source:"USA",target:"IND"};
+
+    $scope.convRates = function(){
+        if(($scope.currency.hasOwnProperty("sourceCurrencyCode")) && ($scope.currency.hasOwnProperty("targetCurrencyCode")) && ($scope.amtToConvert >= 1))
+        {
+            $http({
+                url:"http://api.fixer.io/latest",
+                method:"GET",
+                params: {base:$scope.currency.sourceCurrencyCode,symbols:$scope.currency.targetCurrencyCode}
+
+            }).then(function (resp) {
+
+                $scope.convertedCurrency = resp.data.rates[$scope.currency.targetCurrencyCode];
+                console.log( $scope.convertedCurrency);
+                $scope.currencyToDisplay = true;
+
+            },function(err){
+                console.log(err);
+            })
+        }
+
+    }
+    
     $scope.onCountryChange = function(type){
         console.log(type);
         if(type == 0){
@@ -21,26 +43,7 @@ app.controller("converterCtrl",["$scope","$http","currencyConvSvc",function($sco
         })
     }
 
-    $scope.convRates = function(){
-        if(($scope.currency.hasOwnProperty("sourceCurrencyCode")) && ($scope.currency.hasOwnProperty("targetCurrencyCode")) && ($scope.amtToConvert >= 1))
-        {
-            $http({
-                url:"http://api.fixer.io/latest",
-                method:"GET",
-                params: {base:$scope.currency.sourceCurrencyCode,symbols:$scope.currency.targetCurrencyCode}
 
-            }).then(function (resp) {
-
-                $scope.convertedCurrency = resp.data.rates[$scope.currency.targetCurrencyCode];
-                console.log( $scope.convertedCurrency);
-                $scope.currencyToDisplay = true;
-                
-            },function(err){
-                console.log(err);
-            })
-        }
-
-    }
 
     for(var i = 0;i<2;i++){
         $scope.onCountryChange(i);

@@ -35,7 +35,7 @@
             border-right: none;
         }
 
-        #amntToCvrt { padding-top: 10%; text-align: center; }
+        #amntToCvrt { padding-top: 5%; text-align: center; }
 
         #resultValue{bottom:10%; top:70%; background-color: #a2a2a2; width: 30%; text-align: center}
     </style>
@@ -56,7 +56,7 @@
 
             <div class="col-sm-10">
 
-                <select name="source" id="source" class="form-control" ng-model="currency.source" ng-change = "onCountryChange(0)">
+                <select name="source" id="source" class="form-control input-lg" ng-model="currency.source" ng-change = "onCountryChange(0)">
 
                     <option value="">Select Source Currency</option>
 
@@ -169,12 +169,13 @@
 
 
                 </select>
-
+                <div align="center">
+                    <br><br>
+                    <img align="center" ng-src="{{currency.sourceImgUrl}}" alt="Image" style="width:290px;height:180px;">
+                </div>
             </div>
-
         </div>
-        <br><br>
-        <img ng-src="{{currency.sourceImgUrl}}" alt="Mountain View" style="width:290px;height:150px;">
+
 
     </div>
     <div class="col-xs-6">
@@ -185,7 +186,7 @@
 
             <div class="col-sm-10">
 
-                <select name="target" id="target" class="form-control" ng-model="currency.target" ng-change = "onCountryChange(1)">
+                <select name="target" id="target" class="form-control input-lg" ng-model="currency.target" ng-change = "onCountryChange(1)">
 
                     <option value="">Select Target Currency</option>
 
@@ -299,28 +300,30 @@
 
 
                 </select>
-
+                <div align="center">
+                    <br><br>
+                    <img align="center" ng-src="{{currency.targetImgUrl}}"  alt="India" style="width:290px;height:180px;">
+                </div>
             </div>
 
         </div>
 
-        <br><br>
-        <img ng-src="{{currency.targetImgUrl}}"  alt="India" style="width:290px;height:150px;">
-
     </div>
+
+    
 </div>
 <form ng-submit="convRates()">
     <div id="amntToCvrt"  style="width:200px; margin:0 auto;" align="center">
         <label for="ex1">Amount to convert:</label>
-        <input class="form-control" id="ex1" type="text" ng-model="amtToConvert"><br>
-        <button type="submit">Convert</button>
+        <input class="form-control input-lg" id="ex1" type="number" ng-model="amtToConvert" min="1" autocomplete="off"><br>
+        <button type="submit" class="btn btn-primary btn-lg">Convert</button>
     </div>
 </form>
 
 
 <div id="resultValue" style="width:200px; margin:0 auto;" ng-if="currencyToDisplay" ng-cloak>
 
-    <h2>{{convertedCurrency* amtToConvert | currency : currency.targetCurrencyCode : 3}}</h2>
+    <h1>{{convertedCurrency* amtToConvert | currency : currency.targetCurrencyCode : 3}}</h1>
 
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
