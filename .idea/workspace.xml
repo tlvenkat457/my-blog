@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7ad97895-163a-4c07-a7c1-a03109e95df4" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/forex/app.js" afterPath="$PROJECT_DIR$/apps/forex/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/apps/forex/index.html" afterPath="$PROJECT_DIR$/apps/forex/index.html" />
     </list>
     <ignored path="Azure.iws" />
@@ -28,7 +27,7 @@
         <entry file="file://$PROJECT_DIR$/apps/forex/index.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="262">
-              <caret line="312" column="4" selection-start-line="312" selection-start-column="4" selection-end-line="312" selection-end-column="4" />
+              <caret line="317" column="128" selection-start-line="317" selection-start-column="128" selection-end-line="317" selection-end-column="128" />
               <folding>
                 <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -255,12 +254,12 @@
       <option name="presentableId" value="Default" />
       <updated>1467426343424</updated>
       <workItem from="1467426344504" duration="8110000" />
-      <workItem from="1467566465827" duration="13135000" />
+      <workItem from="1467566465827" duration="13389000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21245000" />
+    <option name="totallyTimeSpent" value="21499000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="195" y="23" width="1100" height="825" extended-state="0" />
@@ -351,7 +350,7 @@
     <entry file="file://$PROJECT_DIR$/apps/forex/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="262">
-          <caret line="312" column="4" selection-start-line="312" selection-start-column="4" selection-end-line="312" selection-end-column="4" />
+          <caret line="317" column="128" selection-start-line="317" selection-start-column="128" selection-end-line="317" selection-end-column="128" />
           <folding>
             <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
