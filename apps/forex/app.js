@@ -1,7 +1,6 @@
 var app = angular.module("currencyConvModule",[]);
 
 app.controller("converterCtrl",["$scope","$http","currencyConvSvc",function($scope,$http,currencyConvSvc){
-    console.log("Hi ctrl");
     $scope.currencyToDisplay = false;
     $scope.currency = {source:"USA",target:"IND"};
 
