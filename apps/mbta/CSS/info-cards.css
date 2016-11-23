@@ -7,7 +7,7 @@ body {
 }
 
 .container {
-  max-width: 800px;
+  max-width: 50px;
   margin:10px auto;
 }
 
@@ -30,7 +30,7 @@ body {
   font-size: 22px;
   line-height: 1.5;
   margin: 0;
-  max-width: 80%;
+  max-width: 30%;
 }
 .quote-card cite {
   font-size: 16px;
@@ -41,7 +41,7 @@ body {
 }
 .quote-card:before {
   font-family: Georgia, serif;
-  content: "T";
+  content: url(http://palaisdesbeauxarts.at/img/erik/1_Wireless_Animated.gif);
   position: absolute;
   top: 10px;
   left: 10px;
