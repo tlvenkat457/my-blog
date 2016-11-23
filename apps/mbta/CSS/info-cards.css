@@ -41,7 +41,7 @@ body {
 }
 .quote-card:before {
   font-family: Georgia, serif;
-  content: url(http://palaisdesbeauxarts.at/img/erik/1_Wireless_Animated.gif);
+  content: "";
   position: absolute;
   top: 10px;
   left: 10px;
@@ -51,12 +51,12 @@ body {
 }
 .quote-card:after {
   font-family: Georgia, serif;
-  content: "T";
+  content: "";
   position: absolute;
-  bottom: -110px;
+  bottom: -50px;
   line-height: 100px;
   right: -32px;
-  font-size: 25em;
+  font-size: 15em;
   color: rgba(238, 238, 238, 0.8);
   font-weight: normal;
 }
