@@ -65,15 +65,16 @@
             </a>
           </div>
           <div class='alert alert-info' id='result_box' ><strong id='result_count'></strong></div>
-          <div class="well well-sm quote-card yellow-card" ng-if='predictionsOn'>
+          
+          <div class="well well-sm quote-card yellow-card" ng-if='predictionsOn' ng-repeat = 'tripInProgress in subwayPredictions track by $index'>
             <div align ="left">
-              <i>inbound to </i><font face="verdana" color="white" size="3">forest hills</font>
+              <i>train to </i><font face="verdana" color="white" size="3">{{tripInProgress.trainTo}}</font>
             </div>
             <div align="right">
-              <p><font face="verdana" color="white" size="6">10 min</font></p>
+              <p><font face="verdana" color="white" size="6">{{tripInProgress.arrivalTime}}</font></p>
             </div>
-            {{predictions | json}}
           </div>
+          
           <div class="alert alert-danger" ng-show='!predictionsOn'>
             <strong>MBTA is sleeping</strong> To refresh click on <a href="javascript:history.go(0)" class="alert-link"><img src="https://www.jonespayne.com/sites/default/files/styles/tiny/public/node-images/T-Logo.png?itok=lLCPp1-T"></img></a>
           </div>
