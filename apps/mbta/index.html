@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='en'>
   <head>
-    <title>Searchable Map Template Demo</title>
+    <title>MBTA tracker</title>
     <meta charset='utf-8' />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta content='' name='description' />
@@ -64,18 +64,17 @@
               Reset
             </a>
           </div>
-          <div class='alert alert-info' id='result_box' ><strong id='result_count'></strong></div>
-          
-          <div class="well well-sm quote-card yellow-card" ng-if='predictionsOn' ng-repeat = 'tripInProgress in subwayPredictions track by $index'>
+          <div class='alert alert-info' id='result_box' >You nearest MBTA station is <strong id='result_count' ng-cloak>{{nearestTstation}}</strong></div>
+          <div class="well well-sm quote-card yellow-card" ng-show='predictionsOff' ng-repeat = 'tripInProgress in subwayPredictions track by $index'>
             <div align ="left">
-              <i>train to </i><font face="verdana" color="white" size="3">{{tripInProgress.trainTo}}</font>
+              <font face="verdana" color="white" size="3" ng-cloak>{{tripInProgress.trainTo}} [{{tripInProgress.subwayLineColor}}]</font>
             </div>
             <div align="right">
-              <p><font face="verdana" color="white" size="6">{{tripInProgress.arrivalTime}}</font></p>
+              <p><font face="verdana" color="white" size="2" ng-cloak>in {{tripInProgress.arrivalTimes}}</font></p>
             </div>
           </div>
           
-          <div class="alert alert-danger" ng-show='!predictionsOn'>
+          <div class="alert alert-danger" ng-show='!predictionsOff'>
             <strong>MBTA is sleeping</strong> To refresh click on <a href="javascript:history.go(0)" class="alert-link"><img src="https://www.jonespayne.com/sites/default/files/styles/tiny/public/node-images/T-Logo.png?itok=lLCPp1-T"></img></a>
           </div>
           <!--
@@ -91,7 +90,7 @@
               <p>Please enable JavaScript to view the map.</p>
             </div>
           </noscript>
-          <div id='map_canvas'></div>
+          <ng-map center="[40.74, -74.18]"></ng-map>
         </div>
       </div>
     </div>
@@ -101,11 +100,13 @@
     <script type="text/javascript" src="https://venkatt.azurewebsites.net/apps/bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.address/1.6/jquery.address.min.js"></script>
     <script type="text/javascript" src="https://venkatt.azurewebsites.net/apps/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places&key=AIzaSyD7Oeekm_At396siJC6YbJfLXQxakQzO_A"></script>
-    <script type="text/javascript" src="https://venkatt.azurewebsites.net/js/maps_lib.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script src="https://rawgit.com/allenhwkim/angularjs-google-maps/master/build/scripts/ng-map.js"></script>
+    <!--<script type="text/javascript" src="https://maps.google.com/maps/api/js?libraries=places&key=AIzaSyD7Oeekm_At396siJC6YbJfLXQxakQzO_A"></script>-->
+    <!--<script type="text/javascript" src="https://venkatt.azurewebsites.net/js/maps_lib.js"></script>-->
     <script type="text/javascript" src="/apps/mbta/app.js"></script>
     <script type="text/javascript" src="/apps/mbta/service/mbta_info_svc.js"></script>
-    <script type='text/javascript'>
+<!--    <script type='text/javascript'>
       //<![CDATA[
         $(window).resize(function () {
           var h = $(window).height(),
@@ -160,6 +161,6 @@
           });
         });
       //]]>
-    </script> 
+    </script>-->
   </body>
 </html>

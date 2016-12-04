@@ -3,9 +3,22 @@ mbta_module.service('mbta_worker',['$http', '$q', function($http, $q) {
         mbta_token = 'wbvXYgd5fkOaVqoHnyz8tg',
         subwayInfo = [];
     
-    var fakeLocation = {userLat:'42.426845',
-                        userLon:'-71.0742895'}
+        var fakeLocation = {userLat:'42.4269242',
+                        userLon:'-71.0748367'};
+                        
+/*      var fakeLocation = {userLat:'42.355518',
+                        userLon:'-71.0624137'};*/
     
+    var epochTimeConverter = function(mbtaEpochTime) {
+        var d = new Date(0); // The 0 there is the key, which sets the date to the epoch
+        d.setUTCSeconds(mbtaEpochTime);
+        return d;
+    };
+    
+    var convertSecToMin = function(timeToArriveSec) {
+        var arrivalTimeMin = Math.ceil((timeToArriveSec/60)-1);
+        return arrivalTimeMin;
+    }
     
     mbta_worker.getStationInfo = function(userLocationObj) {
         var userLocationObj = userLocationObj || fakeLocation ;
@@ -14,7 +27,6 @@ mbta_module.service('mbta_worker',['$http', '$q', function($http, $q) {
         +userLocationObj.userLat
         +'&lon='+userLocationObj.userLon
         +'&format=json').then( function(responseData) {
-            console.log(responseData);
             return responseData.data;
         }, function(responseErr) {
             console.log(responseErr);
@@ -33,7 +45,6 @@ mbta_module.service('mbta_worker',['$http', '$q', function($http, $q) {
     mbta_worker.getpredictionsbystop = function(stop_id) {
         var stop_id = stop_id || 'place-mlmnl' ;
         return $http.get('https://realtime.mbta.com/developer/api/v2/predictionsbystop?api_key=wbvXYgd5fkOaVqoHnyz8tg&stop='+stop_id+'&format=json').then( function(responseData) {
-            console.log(responseData);
             return responseData.data;
         }, function(responseErr) {
             console.log(responseErr);
@@ -41,20 +52,21 @@ mbta_module.service('mbta_worker',['$http', '$q', function($http, $q) {
     }
     
     mbta_worker.getFormattedSubwayInfo = function(subwayInfoArray) {
-        var subwayLineInfoObj = {};
         angular.forEach(subwayInfoArray, function(subwayLines, key) {
-            subwayLineInfoObj.subwayLineColor = subwayLines.route_name;
-                angular.forEach(subwayLines.direction, function(subwayTrainDirection, key) {
-                    subwayLineInfoObj.subwayLineBound = subwayTrainDirection.direction_name;
-                    angular.forEach(subwayTrainDirection.trip, function(tripInProgress, key) {
-                        subwayLineInfoObj.trainTo = tripInProgress.trip_headsign;
-                        subwayLineInfoObj.arrivalTime = tripInProgress.sch_arr_dt;
-                        console.log(subwayLineInfoObj);
-                        subwayInfo.push(subwayLineInfoObj);
-                    })
+            angular.forEach(subwayLines.direction, function(subwayTrainDirection, key) {
+                var subwayLineInfoObj = {},
+                    tripTimesArray = [];
+                subwayLineInfoObj.subwayLineColor = subwayLines.route_name;
+                subwayLineInfoObj.subwayLineBound = subwayTrainDirection.direction_name;
+                subwayLineInfoObj.trainTo = subwayTrainDirection.trip[key].trip_headsign;
+                for(var i = 0; i <subwayTrainDirection.trip.length; i++) {
+                        tripTimesArray.push(convertSecToMin(subwayTrainDirection.trip[i].pre_away));
+                }
+                subwayLineInfoObj.arrivalTimes = tripTimesArray.join(', ');
+                subwayInfo.push(subwayLineInfoObj);
             })
-            
         })
+        console.log(subwayInfo);
         return subwayInfo;
     }
     
