@@ -207,3 +207,16 @@ a:hover {
 		font-size: 1.8em;
 	}
 }
+
+.welcome {
+	text-align: center;
+	font-size: 100px;
+	color: #34ff16;
+	font-weight: 100;
+}
+
+.welcome_cursor {
+	color: #34ff16;
+	text-align: center;
+	font-size: 145px;
+}
